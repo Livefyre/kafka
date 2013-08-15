@@ -82,8 +82,14 @@ class KafkaConfig private (val props: VerifiableProperties) extends ZKConfig(pro
    * need to be different from the port to which the broker binds. If this is not set,
    * it will publish the same port that the broker binds to. */
   val advertisedPort: Int = props.getInt("advertised.port", port)
+  /* If this is set, it will only bind to this address. If this is not set,
+   * it will bind to all interfaces */
+  val bindHostName: String = props.getString("host.bind.name", null)
 
-  /* the SO_SNDBUFF buffer of the socket sever sockets */
+  /* hostname of broker. To publish to ZK and clients */ 
+  val hostName: String = props.getString("host.name", null)
+  
+ /* the SO_SNDBUFF buffer of the socket sever sockets */
   val socketSendBufferBytes: Int = props.getInt("socket.send.buffer.bytes", 100*1024)
   
   /* the SO_RCVBUFF buffer of the socket sever sockets */
