@@ -66,7 +66,7 @@ class KafkaServer(val config: KafkaConfig, time: Time = SystemTime) extends Logg
     logManager.startup()
 
     socketServer = new SocketServer(config.brokerId,
-                                    config.hostName,
+                                    config.bindHostName,
                                     config.port,
                                     config.numNetworkThreads,
                                     config.queuedMaxRequests,

@@ -54,11 +54,14 @@ class KafkaConfig private (val props: VerifiableProperties) extends ZKConfig(pro
   /* the port to listen and accept connections on */
   val port: Int = props.getInt("port", 6667)
 
-  /* hostname of broker. If this is set, it will only bind to this address. If this is not set,
-   * it will bind to all interfaces, and publish one to ZK */
-  val hostName: String = props.getString("host.name", null)
+  /* If this is set, it will only bind to this address. If this is not set,
+   * it will bind to all interfaces */
+  val bindHostName: String = props.getString("host.bind.name", null)
 
-  /* the SO_SNDBUFF buffer of the socket sever sockets */
+  /* hostname of broker. To publish to ZK and clients */ 
+  val hostName: String = props.getString("host.name", null)
+  
+ /* the SO_SNDBUFF buffer of the socket sever sockets */
   val socketSendBufferBytes: Int = props.getInt("socket.send.buffer.bytes", 100*1024)
   
   /* the SO_RCVBUFF buffer of the socket sever sockets */
